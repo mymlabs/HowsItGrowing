@@ -25,7 +25,7 @@
 		offsetX = container.offsetLeft;
 		offsetY = container.offsetTop;
 		INPUT_TYPE = null;
-		filesToLoad = 9;
+		filesToLoad = 10;
 		filesLoaded = 0;
 		GAME_STATE = "loading";
 		gameLoaded = false;
@@ -45,13 +45,36 @@
 
 
 		currentQuestion = 1;
-		totalQuestions = 15;
+		
 
 		percentageResult = 0;
 
 		activeFadeObjects = [];
 		activeTitleObjects = [];
 		activeSliderObject = [];
+		questionText = "";
+		questions = [
+			"I make time for self care, mentally and physically.",
+			"I say no when I am overworked and/or tired.",
+			"I do the things I love.",
+			"I am comfortable reaching out for help when I need it.",
+			"I know who I can go to for help.",
+			"I know when I need to seek help from others.",
+			"I know what I can do to make myself feel better or get out of a slump.",
+			"I can sit with uncomfortable feelings.",
+			"I am comfortable communicating my feelings to others.",
+			"I have expectations of how others should treat me and I stand up for myself when needed.",
+			"I am comfortable setting limits with others.",
+			"I am open to other people’s boundaries and limits.",
+			"I often think about what I could have done differently in situations that don’t go how I hoped.",
+			"I like to plan ahead and think of the best way to approach things.",
+			"I give myself time to reflect and process on the days events."
+		]
+		totalQuestions = questions.length;
+		currentPlant = 0;
+		plantValues = [];
+		finalScores = [];
+
 	}//End of init
 
 //   /$$                           /$$ /$$                    
@@ -76,6 +99,7 @@
 		sliderControl = new Image();
 		backBtn = new Image();
 		nextBtn = new Image();
+		doneBtn = new Image();
 		//----------     ADD LISTENERS     ----------
 		background.onload = updateLoading();
 		youthExpertsLogo.onload = updateLoading();
@@ -86,6 +110,7 @@
 		sliderControl.onload = updateLoading();
 		backBtn.onload = updateLoading();
 		nextBtn.onload = updateLoading();
+		doneBtn.onload = updateLoading();
 		//----------     SET SOURCES    ----------
 		background.src = "images/background.png";
 		youthExpertsLogo.src = "images/youthexperts_sm.png";
@@ -96,6 +121,7 @@
 		sliderControl.src = "images/slider_control.png";
 		backBtn.src = "images/back_button.png";
 		nextBtn.src = "images/next_button.png";
+		doneBtn.src = "images/done_button.png";
 	}//End of loadAssets
 
 	//************************************
@@ -136,8 +162,9 @@
 		sliderObject = function(){
 			//----------     INIT     ----------
 			var that = this;
+			that.startX = 946;
 			that.x = 946;
-			that.y = 290;
+			that.y = 340;
 			that.width = sliderControl.width;
 			that.height = sliderControl.height;
 			that.xMin = 739;
@@ -285,25 +312,40 @@
 				titleObject.update();
 			});
 
-			c.drawImage(sliderBG,746,311);
+			c.drawImage(sliderBG,746,361);
 			/*c.drawImage(sliderControl,941,290);*/
 			activeSliderObject[0].update();
 
 			c.textAlign = "center";
 			c.fillStyle = "#000";
-			c.font = "25px arial bold, sans-serif";
+			c.font = "25px arial, sans-serif";
 
-			c.fillText("Question " + currentQuestion + " of " + totalQuestions + ":",962,50);
-			wrapText(c,"Don't know what's out there",745,387,198,26);
-			wrapText(c,"Lots of community connections",1167,387,198,26);
-			c.fillText("Unsure",959,390);
-
-			c.font = "34px arial bold, sans-serif";
-			wrapText(c,"I have wide reaching roots that connect me to my community.",956,180,536,35);
+			c.fillText("Question " + currentQuestion + " of " + totalQuestions + ":",962,40);
+			c.fillText("Not at all",745,440);
+			c.fillText("Yes, definitely",1167,440);
+			c.fillText("Sometimes",959,440);
 
 
-			drawScaledImage(backBtn,backBtnScale,741,653);
-			drawScaledImage(nextBtn,nextBtnScale,1187,655);
+			c.font = "italic 32px arial, sans-serif";
+			c.fillText("Prioritizing your self care",954,112);
+
+			c.font = "bold 34px arial, sans-serif";
+			wrapText(c,questionText,956,230,536,35);
+
+			if(currentQuestion > 1){
+				drawScaledImage(backBtn,backBtnScale,741,653);
+			}
+			if(currentQuestion < totalQuestions){
+				drawScaledImage(nextBtn,nextBtnScale,1187,655);
+			}else{
+				drawScaledImage(doneBtn,nextBtnScale,1187,655);
+			}
+		}
+
+		if(GAME_STATE === "endscreen"){
+			c.drawImage(background,0,0);
+			c.drawImage(youthExpertsLogo,953,611);
+			c.drawImage(gameLogo,25,21);
 		}
 	}//End of updateScreen
 
@@ -322,10 +364,15 @@
 			case "title":
 				activeTitleObjects[activeTitleObjects.length] = new titleObject(quizBG,screenWidth,0,617,0);
 				activeSliderObject[0] = new sliderObject();
+				questionText = questions[currentQuestion - 1];
 				GAME_STATE = "quiz";
 				break;
 
 			case "quiz":
+				calculateEndPlant();
+				GAME_STATE = "endscreen";
+				break;
+			case "endscreen":
 
 				break;
 		}
@@ -424,19 +471,59 @@
 				//----------     BACK BUTTON     ----------
 				if(modelX > 652 && modelX < 829){
 					if(modelY > 606 && modelY < 700){
-						backBtnScale = 1;
+						if(currentQuestion > 1){
+							backBtnScale = 1;
+							currentQuestion--;
+							questionText = questions[currentQuestion - 1];
+							/*console.log();*/
+
+/*							var thisPercentage = plantValues[currentQuestion - 1] / 100;
+							var pixelValue = thisPercentage * activeSliderObject[0].sliderLength;
+							var newPosition = pixelValue + activeSliderObject[0].xMin;
+							console.log(thisPercentage + " of " + activeSliderObject[0].sliderLength + " is " + pixelValue);
+							activeSliderObject[0].x = newPosition;*/
+							activeSliderObject[0].x = ((plantValues[currentQuestion - 1] / 100)
+															* activeSliderObject[0].sliderLength)
+															+ activeSliderObject[0].xMin;
+							//activeSliderObject[0].x = thisPercentage * activeSliderObject[0].sliderLength) + activeSliderObject[0].xMin;
+						}
 					}
 				}
 				//----------     NEXT BUTTON     ----------
 				if(modelX > 1108 && modelX < 1266){
 					if(modelY > 606 && modelY < 704){
-						nextBtnScale = 1;
-						calculateAnswerPercent();
+						if(currentQuestion <= totalQuestions){
+							nextBtnScale = 1;
+							calculateAnswerPercent();
+
+							if(currentQuestion < totalQuestions){
+								currentQuestion++;
+								if(currentQuestion <= plantValues.length){
+									activeSliderObject[0].x = ((plantValues[currentQuestion - 1] / 100)
+																* activeSliderObject[0].sliderLength)
+																+ activeSliderObject[0].xMin;
+								}else{
+									activeSliderObject[0].x = activeSliderObject[0].startX;
+								}
+								
+								questionText = questions[currentQuestion - 1];
+							}else{
+								changeState();
+							}
+
+						}
 					}
 				}
 				//----------     LETTING GO OF SLIDER     ----------
 				if(activeSliderObject[0].active === true){
 					activeSliderObject[0].active = false;
+				}else{
+					if(modelY > 360 && modelY < 385){
+						if(modelX > 746 && modelX < 1164){
+							activeSliderObject[0].x = modelX - activeSliderObject[0].width / 2;
+						}
+					}
+
 				}
 				break;
 		}
@@ -550,12 +637,43 @@
 	function calculateAnswerPercent(){
 		var sliderPosition = activeSliderObject[0].x + activeSliderObject[0].width / 2;
 		percentageResult = (sliderPosition - activeSliderObject[0].xMin) / activeSliderObject[0].sliderLength;
-
-		console.log("Length: " + activeSliderObject[0].sliderLength);
-		console.log("Position: " + sliderPosition);
-		console.log("Result: " + Math.floor(percentageResult * 100) + "%");
+		//adjust for my wonky math
+		percentageResult = percentageResult * 100 - 3;
+		if(percentageResult < 0){
+			percentageResult = 0;
+		}
+		if(percentageResult > 100){
+			percentageResult = 100;
+		}
+		if(plantValues.length < currentQuestion){
+			/*console.log('adding new value');*/
+			plantValues.push(Math.floor(percentageResult));
+		}else{
+			/*console.log('updating array');*/
+			plantValues[currentQuestion - 1] = percentageResult;
+		}
 	};
 
+	//*****************************************
+	//******     CALCULATE END PLANT     ******
+	//*****************************************
+	function calculateEndPlant(){
+
+		for(ii=0;ii<5;ii++){
+			var plantTrack = 0;
+			for(jj=0;jj<3;jj++){
+				plantTrack += plantValues[jj + (ii*3)];
+			}
+			plantTrack = Math.floor(plantTrack /= 3);
+			console.log('total for plant ' + ii + ": " + plantTrack);
+			finalScores[ii] = plantTrack;
+		}
+
+		console.log(finalScores);
+		console.log(Math.max.apply(null,finalScores));
+		var finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
+		console.log(finalPlant);
+	}
 
 	//****************************
 	//******     RESIZE     ******
