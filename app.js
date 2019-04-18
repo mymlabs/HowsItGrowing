@@ -25,7 +25,7 @@
 		offsetX = container.offsetLeft;
 		offsetY = container.offsetTop;
 		INPUT_TYPE = null;
-		filesToLoad = 10;
+		filesToLoad = 16;
 		filesLoaded = 0;
 		GAME_STATE = "loading";
 		gameLoaded = false;
@@ -37,6 +37,7 @@
 		takeQuizBtnScale = 1;
 		nextBtnScale = 1;
 		backBtnScale = 1;
+		printBtnScale = 1;
 
 		amplitude = 0.02;
 		period = 2000;
@@ -52,6 +53,8 @@
 		activeFadeObjects = [];
 		activeTitleObjects = [];
 		activeSliderObject = [];
+		activePopUps = [];
+
 		questionText = "";
 		questions = [
 			"I make time for self care, mentally and physically.",
@@ -72,8 +75,13 @@
 		]
 		totalQuestions = questions.length;
 		currentPlant = 0;
+		questionThemeText = "";
+
+
 		plantValues = [];
 		finalScores = [];
+
+		finalPlantName = "";
 
 	}//End of init
 
@@ -100,6 +108,12 @@
 		backBtn = new Image();
 		nextBtn = new Image();
 		doneBtn = new Image();
+		cactusPlant = new Image();
+		fernPlant = new Image();
+		lavendarPlant = new Image();
+		moneyPlant = new Image();
+		snakePlant = new Image();
+		printTipsBtn = new Image();
 		//----------     ADD LISTENERS     ----------
 		background.onload = updateLoading();
 		youthExpertsLogo.onload = updateLoading();
@@ -111,6 +125,12 @@
 		backBtn.onload = updateLoading();
 		nextBtn.onload = updateLoading();
 		doneBtn.onload = updateLoading();
+		cactusPlant.onload = updateLoading();
+		fernPlant.onload = updateLoading();
+		lavendarPlant.onload = updateLoading();
+		moneyPlant.onload = updateLoading();
+		snakePlant.onload = updateLoading();
+		printTipsBtn.onload = updateLoading();
 		//----------     SET SOURCES    ----------
 		background.src = "images/background.png";
 		youthExpertsLogo.src = "images/youthexperts_sm.png";
@@ -122,6 +142,12 @@
 		backBtn.src = "images/back_button.png";
 		nextBtn.src = "images/next_button.png";
 		doneBtn.src = "images/done_button.png";
+		cactusPlant.src = "images/cactus_plant.png";
+		fernPlant.src = "images/fern_plant.png";
+		lavendarPlant.src = "images/lavendar_plant.png";
+		moneyPlant.src = "images/money_plant.png";
+		snakePlant.src = "images/snake_plant.png";
+		printTipsBtn.src = "images/print_tips.png";
 	}//End of loadAssets
 
 	//************************************
@@ -257,6 +283,43 @@
 			}
 		}//End of titleObject
 
+		titlePopUp = function(srcImage,xPos,yPos){
+			var that = this;
+			that.image = srcImage;
+			that.x = xPos;
+			that.y = yPos;
+			that.scale = .2;
+			that.scaleTarget = 1;
+			that.scaleVel = 0;
+			that.width = that.image.width;
+			that.height = that.image.height;
+			that.timer = new Date().getTime(), 
+			that.life = 1200;
+			that.active = true;
+			that.update = function(){
+				var timerCheck = new Date().getTime();
+				if(timerCheck >= that.timer + that.life){
+					that.active = false;
+				}else{
+					var distance = that.scaleTarget - that.scale;
+					var accel = distance * targetSpring;
+					that.scaleVel += accel;
+					that.scaleVel *= targetFriction;
+					that.scale += that.scaleVel;
+				}
+				if(that.active == true){
+					c.save();
+						var drawPositionX = Math.floor(-(that.width * that.scale) / 2);
+						var drawPositionY = Math.floor(-(that.height * that.scale) / 2);
+						c.translate(that.x + drawPositionX,that.y + drawPositionY);
+						c.scale(that.scale,that.scale);
+						c.drawImage(that.image,0,0);
+					c.restore();
+				}else{
+					c.drawImage(that.image,that.x - that.width/2,that.y - that.height/2);
+				}
+			}
+		}//End of title popup
 	}//End of initObjects
 
 //                             /$$             /$$              
@@ -327,7 +390,7 @@
 
 
 			c.font = "italic 32px arial, sans-serif";
-			c.fillText("Prioritizing your self care",954,112);
+			c.fillText(questionThemeText,954,112);
 
 			c.font = "bold 34px arial, sans-serif";
 			wrapText(c,questionText,956,230,536,35);
@@ -346,6 +409,24 @@
 			c.drawImage(background,0,0);
 			c.drawImage(youthExpertsLogo,953,611);
 			c.drawImage(gameLogo,25,21);
+
+			activeTitleObjects.forEach(function(titleObject,index){
+				titleObject.update();
+			});
+
+			drawScaledImage(printTipsBtn,printBtnScale,955,664);
+
+			activePopUps.forEach(function(popUpObject,index){
+				popUpObject.update();
+			});
+
+			c.textAlign = "center";
+			c.fillStyle = "#000";
+			c.font = "25px arial, sans-serif";
+			c.fillText("You are a...",954,40);
+
+			c.font = "45px arial, sans-serif";
+			c.fillText(finalPlantName,954,105);
 		}
 	}//End of updateScreen
 
@@ -365,6 +446,7 @@
 				activeTitleObjects[activeTitleObjects.length] = new titleObject(quizBG,screenWidth,0,617,0);
 				activeSliderObject[0] = new sliderObject();
 				questionText = questions[currentQuestion - 1];
+				setThemeText(currentQuestion);
 				GAME_STATE = "quiz";
 				break;
 
@@ -440,6 +522,15 @@
 				}
 				activeSliderObject[0].checkCollision(modelX,modelY);
 				break;
+
+			case "endscreen":
+				//----------     PRINT TIPS BUTTONS     ----------
+				if(modelX > 675 && modelX < 1235){
+					if(modelY > 619 && modelY < 708){
+						printBtnScale = 1.1;
+					}
+				}
+				break;
 		}
 
 
@@ -507,6 +598,7 @@
 								}
 								
 								questionText = questions[currentQuestion - 1];
+								setThemeText(currentQuestion);
 							}else{
 								changeState();
 							}
@@ -524,6 +616,15 @@
 						}
 					}
 
+				}
+				break;
+			case "endscreen":
+
+				//----------     PRINT TIPS BUTTONS     ----------
+				if(modelX > 675 && modelX < 1235){
+					if(modelY > 619 && modelY < 708){
+						printBtnScale = 1;
+					}
 				}
 				break;
 		}
@@ -547,6 +648,7 @@
 		takeQuizBtnScale = 1;
 		backBtnScale = 1;
 		nextBtnScale = 1;
+		printBtnScale = 1;
 
 		switch(GAME_STATE){
 			case "title":
@@ -582,7 +684,15 @@
 					}
 				}
 				break;
-
+			case "endscreen":
+				
+				//----------     PRINT TIPS BUTTONS     ----------
+				if(modelX > 675 && modelX < 1235){
+					if(modelY > 619 && modelY < 708){
+						printBtnScale = 1.1;
+					}
+				}
+				break;
 		}
 
 	}//End of on Move
@@ -672,8 +782,53 @@
 		console.log(finalScores);
 		console.log(Math.max.apply(null,finalScores));
 		var finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
-		console.log(finalPlant);
+		console.log(finalPlant + 1);
+
+		switch(finalPlant){
+			case 0:
+				finalPlantName = "Snake Plant!";
+				activePopUps[0] = new titlePopUp(snakePlant,1109,368);
+				break;
+			case 1:
+				finalPlantName = "Cactus!";
+				activePopUps[0] = new titlePopUp(cactusPlant,1109,368);
+				break;
+			case 2:
+				finalPlantName = "Money Tree!";
+				activePopUps[0] = new titlePopUp(moneyPlant,1109,368);
+				break;
+			case 3:
+				finalPlantName = "Lavendar Plant!";
+				activePopUps[0] = new titlePopUp(lavendarPlant,1109,368);
+				break;
+			case 4:
+				finalPlantName = "Fern Tree!";
+				activePopUps[0] = new titlePopUp(fernPlant,1109,368);
+				break;
+		}
+
 	}
+
+	//***********************************
+	//*****     SET THEME TEXT     ******
+	//***********************************
+	setThemeText = function(questionNum){
+		if(questionNum < 4){
+			questionThemeText = "Prioritizing your self care.";
+		}
+		if(questionNum > 3 && questionNum < 7){
+			questionThemeText = "Asking for help when you need it.";
+		}
+		if(questionNum > 6 && questionNum < 10){
+			questionThemeText = "Coping with uncomfortable emotions.";
+		}
+		if(questionNum > 9 && questionNum < 13){
+			questionThemeText = "Building boundaries";
+		}
+		if(questionNum > 12){
+			questionThemeText = "Reflecting on your life";
+		}
+	};
 
 	//****************************
 	//******     RESIZE     ******
