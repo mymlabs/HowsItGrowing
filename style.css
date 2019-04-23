@@ -7,10 +7,10 @@ html,body{
     background: #000;
 }
 
-#wrong_orientation > img{
+/*#wrong_orientation > img{
     width: 100%;
     height: auto;
-}
+}*/
 
 #container{
     position: relative;
@@ -29,7 +29,7 @@ canvas{
     height: auto;
 }
 
-@media (orientation: portrait){
+/*@media (orientation: portrait){
     #canvas{display: none;}
     #wrong_orientation{display: block;}
 }
@@ -37,4 +37,4 @@ canvas{
 @media (orientation: landscape){
     #canvas{display: block;}
     #wrong_orientation{display: none;}
-}
+}*/
