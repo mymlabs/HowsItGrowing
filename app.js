@@ -791,12 +791,14 @@
 		var finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
 		console.log(finalPlant + 1);
 
+				plantText_01 = "The dog smells bad. Run in circles eat an easter feather as if it were a bird then burp victoriously, lie in the sink all day. Eat prawns daintily with a claw then lick paws clean then retire to the warmest spot on the couch.";
+				plantText_02 = "Make muffins white cat sleeps on a black shirt, freak human out make funny noise mow mow mow mow mow mow success now attack human terrorize the hundred and twenty pound rottweiler and steal his bed, not sorry.";
+
+
 		switch(finalPlant){
 			case 0:
 				finalPlantName = "Snake Plant!";
 				activePopUps[0] = new titlePopUp(snakePlant,1109,368);
-				plantText_01 = "The dog smells bad. Run in circles eat an easter feather as if it were a bird then burp victoriously, lie in the sink all day. Eat prawns daintily with a claw then lick paws clean then retire to the warmest spot on the couch.";
-				plantText_02 = "Make muffins white cat sleeps on a black shirt, freak human out make funny noise mow mow mow mow mow mow success now attack human terrorize the hundred and twenty pound rottweiler and steal his bed, not sorry.";
 
 				break;
 			case 1:
@@ -844,6 +846,7 @@
 	//******     RESIZE     ******
 	//****************************
 	window.onresize = function() {
+		console.log("orientation");
 		//Needed to update offsets since it's part of the calculation
 		offsetX = container.offsetLeft;
 		offsetY = container.offsetTop;
