@@ -82,6 +82,8 @@
 		finalScores = [];
 
 		finalPlantName = "";
+		plantText_01 = "";
+		plantText_02 = "";
 
 	}//End of init
 
@@ -427,6 +429,11 @@
 
 			c.font = "45px arial, sans-serif";
 			c.fillText(finalPlantName,954,105);
+
+			c.textAlign = "left";
+			c.font = "25px arial, sans-serif";
+			wrapText(c,plantText_01,648,156,340,26);
+			wrapText(c,plantText_02,648,390,340,26);
 		}
 	}//End of updateScreen
 
@@ -788,6 +795,9 @@
 			case 0:
 				finalPlantName = "Snake Plant!";
 				activePopUps[0] = new titlePopUp(snakePlant,1109,368);
+				plantText_01 = "The dog smells bad. Run in circles eat an easter feather as if it were a bird then burp victoriously, lie in the sink all day. Eat prawns daintily with a claw then lick paws clean then retire to the warmest spot on the couch.";
+				plantText_02 = "Make muffins white cat sleeps on a black shirt, freak human out make funny noise mow mow mow mow mow mow success now attack human terrorize the hundred and twenty pound rottweiler and steal his bed, not sorry.";
+
 				break;
 			case 1:
 				finalPlantName = "Cactus!";
