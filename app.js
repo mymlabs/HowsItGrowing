@@ -85,6 +85,8 @@
 		plantText_01 = "";
 		plantText_02 = "";
 
+		paragraphYPos = 0;
+
 	}//End of init
 
 //   /$$                           /$$ /$$                    
@@ -425,15 +427,15 @@
 			c.textAlign = "center";
 			c.fillStyle = "#000";
 			c.font = "25px arial, sans-serif";
-			c.fillText("You are a...",954,40);
+			c.fillText("You are a...",954,35);
 
 			c.font = "45px arial, sans-serif";
-			c.fillText(finalPlantName,954,105);
+			c.fillText(finalPlantName,954,90);
 
 			c.textAlign = "left";
 			c.font = "25px arial, sans-serif";
-			wrapText(c,plantText_01,648,156,340,26);
-			wrapText(c,plantText_02,648,390,340,26);
+			wrapText(c,plantText_01,648,136,340,26);
+			wrapText(c,plantText_02,648,paragraphYPos,340,26);
 		}
 	}//End of updateScreen
 
@@ -791,34 +793,45 @@
 		var finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
 		console.log(finalPlant + 1);
 
-				plantText_01 = "The dog smells bad. Run in circles eat an easter feather as if it were a bird then burp victoriously, lie in the sink all day. Eat prawns daintily with a claw then lick paws clean then retire to the warmest spot on the couch.";
-				plantText_02 = "Make muffins white cat sleeps on a black shirt, freak human out make funny noise mow mow mow mow mow mow success now attack human terrorize the hundred and twenty pound rottweiler and steal his bed, not sorry.";
 
 
 		switch(finalPlant){
 			case 0:
 				finalPlantName = "Snake Plant!";
 				activePopUps[0] = new titlePopUp(snakePlant,1109,368);
-
+				plantText_01 = "Snake plants are hardy and resilient. They can live with very little sunlight and very little water. Despite this they give a lot back to their environment, snake plants produce oxygen and purify the air.";
+				plantText_02 = "Just like the snake plant you might find yourself giving a lot to others. People come to you due to your strong and reliable presence. You give a lot of your time and energy to others and sometimes you are at risk of neglecting your own self care needs.";
+				paragraphYPos = 370;
 				break;
 			case 1:
 				finalPlantName = "Cactus!";
 				activePopUps[0] = new titlePopUp(cactusPlant,1109,368);
+				plantText_01 = "Cacti are a symbol of warmth and protection due to their spikes and the fact that they grow in sunny climates and produce beautiful flowers. They don't need a lot of water to grow and their shallow root systems help them absorb any available water quickly.";
+				plantText_02 = "Similar to a cacti you project a warm and welcoming vibe. People see you as independent, strong and determined. A can-do attitude is a great asset but it’s important to remember that it’s ok to ask for help when you need it.";
+				paragraphYPos = 391;
 				break;
 			case 2:
 				finalPlantName = "Money Tree!";
 				activePopUps[0] = new titlePopUp(moneyPlant,1109,368);
+				plantText_01 = "Money trees are associated with positive energy, luck and prosperity. They thrive with consistency, requiring lots of sunlight and regular watering and pruning. They are grounded and provide shelter for those around them.";
+				plantText_02 = "Like the money tree you are positive and focused on caring for those around you. It can be hard for you to sit with and express negative emotions. While sharing your negative emotions might seem scary, it is vital because it will help you grow and flourish.";
+				paragraphYPos = 370;
 				break;
 			case 3:
 				finalPlantName = "Lavendar Plant!";
 				activePopUps[0] = new titlePopUp(lavendarPlant,1109,368);
+				plantText_01 = "Lavender is associated with healing and calming due to it’s beautiful scent and appearance, as a result it is used extensively in aromatherapy and cooking. While this plant is very tough, it needs full sun and the soil needs to be well drained";
+				plantText_02 = "Just like lavender you have a calming presence to those around you. People may often come to you to vent their problems or ask for advice. You may need to build up your boundaries and protect your energy to be there for them in the long run.";
+				paragraphYPos = 391;
 				break;
 			case 4:
-				finalPlantName = "Fern Tree!";
+				finalPlantName = "Palm Plant!";
 				activePopUps[0] = new titlePopUp(fernPlant,1109,368);
+				plantText_01 = "Palm plants are associated with victory, peace and tropical vacations. These plants need warmth, lot’s of sun and just the right amount of water. They need to be fertilized during the dormant season so can they keep growing strong.";
+				plantText_02 = "Just as the palm takes a rest during the dormant season and needs nourishment, you need to do this for yourself as well. If you are feeling overwhelmed set aside time to reflect on your past experiences and how they may still be affecting you.";
+				paragraphYPos = 391;
 				break;
 		}
-
 	}
 
 	//***********************************
