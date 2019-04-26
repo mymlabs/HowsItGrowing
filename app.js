@@ -113,8 +113,8 @@
 		nextBtn = new Image();
 		doneBtn = new Image();
 		cactusPlant = new Image();
-		fernPlant = new Image();
-		lavendarPlant = new Image();
+		palmPlant = new Image();
+		lavenderPlant = new Image();
 		moneyPlant = new Image();
 		snakePlant = new Image();
 		printTipsBtn = new Image();
@@ -130,8 +130,8 @@
 		nextBtn.onload = updateLoading();
 		doneBtn.onload = updateLoading();
 		cactusPlant.onload = updateLoading();
-		fernPlant.onload = updateLoading();
-		lavendarPlant.onload = updateLoading();
+		palmPlant.onload = updateLoading();
+		lavenderPlant.onload = updateLoading();
 		moneyPlant.onload = updateLoading();
 		snakePlant.onload = updateLoading();
 		printTipsBtn.onload = updateLoading();
@@ -147,8 +147,8 @@
 		nextBtn.src = "images/next_button.png";
 		doneBtn.src = "images/done_button.png";
 		cactusPlant.src = "images/cactus_plant.png";
-		fernPlant.src = "images/fern_plant.png";
-		lavendarPlant.src = "images/lavendar_plant.png";
+		palmPlant.src = "images/palm_plant.png";
+		lavenderPlant.src = "images/lavender_plant.png";
 		moneyPlant.src = "images/money_plant.png";
 		snakePlant.src = "images/snake_plant.png";
 		printTipsBtn.src = "images/print_tips.png";
@@ -392,10 +392,11 @@
 			c.fillText("Yes, definitely",1167,440);
 			c.fillText("Sometimes",959,440);
 
-
-			c.font = "italic 32px arial, sans-serif";
+			c.fillStyle = "#05900e";
+			c.font = "32px arial, sans-serif";
 			c.fillText(questionThemeText,954,112);
 
+			c.fillStyle = "#000";
 			c.font = "bold 34px arial, sans-serif";
 			wrapText(c,questionText,956,230,536,35);
 
@@ -818,15 +819,15 @@
 				paragraphYPos = 370;
 				break;
 			case 3:
-				finalPlantName = "Lavendar Plant!";
-				activePopUps[0] = new titlePopUp(lavendarPlant,1109,368);
+				finalPlantName = "Lavender Plant!";
+				activePopUps[0] = new titlePopUp(lavenderPlant,1109,368);
 				plantText_01 = "Lavender is associated with healing and calming due to it’s beautiful scent and appearance, as a result it is used extensively in aromatherapy and cooking. While this plant is very tough, it needs full sun and the soil needs to be well drained";
 				plantText_02 = "Just like lavender you have a calming presence to those around you. People may often come to you to vent their problems or ask for advice. You may need to build up your boundaries and protect your energy to be there for them in the long run.";
 				paragraphYPos = 391;
 				break;
 			case 4:
 				finalPlantName = "Palm Plant!";
-				activePopUps[0] = new titlePopUp(fernPlant,1109,368);
+				activePopUps[0] = new titlePopUp(palmPlant,1109,368);
 				plantText_01 = "Palm plants are associated with victory, peace and tropical vacations. These plants need warmth, lot’s of sun and just the right amount of water. They need to be fertilized during the dormant season so can they keep growing strong.";
 				plantText_02 = "Just as the palm takes a rest during the dormant season and needs nourishment, you need to do this for yourself as well. If you are feeling overwhelmed set aside time to reflect on your past experiences and how they may still be affecting you.";
 				paragraphYPos = 391;
