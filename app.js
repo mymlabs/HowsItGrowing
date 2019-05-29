@@ -86,7 +86,8 @@
 		pdfUrl = "";
 
 		quizBtnScale = 1;
-		shareBtnScale = 1;
+		twtBtnScale = 1;
+		fbBtnScale = 1;
 
 	}//End of init
 
@@ -124,6 +125,8 @@
 		youthExpertsSM = new Image();
 		cscLogo = new Image();
 		canadaLogo = new Image();
+		fbLink = new Image();
+		twitterLink = new Image();
 		//----------     ADD LISTENERS     ----------
 		background.onload = updateLoading();
 		youthExpertsLogo.onload = updateLoading();
@@ -146,7 +149,8 @@
 		youthExpertsSM.onload = updateLoading();
 		cscLogo.onload = updateLoading();
 		canadaLogo.onload = updateLoading();
-
+		fbLink.onload = updateLoading();
+		twitterLink.onload = updateLoading();
 		//----------     SET SOURCES    ----------
 		background.src = "images/background.png";
 		youthExpertsLogo.src = "images/youthexperts_lg.png";
@@ -169,7 +173,8 @@
 		youthExpertsSM.src = "images/youthexperts_sm.png";
 		cscLogo.src = "images/csc_logo.png";
 		canadaLogo.src = "images/canada_logo.png";
-
+		fbLink.src = "images/fb_link.png";
+		twitterLink.src = "images/twt_link.png";
 	}//End of loadAssets
 
 	//************************************
@@ -447,7 +452,13 @@
 				titleObject.update();
 			});*/
 
-			drawScaledImage(shareBtn,shareBtnScale,1015,367);
+			
+
+			c.drawImage(shareBtn, 835, 327);
+
+			drawScaledImage(twitterLink,twtBtnScale,1066,360);
+			drawScaledImage(fbLink,fbBtnScale,1174,360);
+
 			drawScaledImage(printTipsBtn,printBtnScale,1023,480);
 			drawScaledImage(retakeQuizBtn,quizBtnScale,1018,590);
 
@@ -601,11 +612,17 @@
 
 			case "endscreen":
 				//----------     SHARE BUTTON     ----------
-				if(modelX > 925 && modelX < 1105){
-					if(modelY > 320 && modelY < 415){
-						shareBtnScale = 1.1;
+				if(modelY > 315 && modelY < 405){
+					//----------    TWITTER    ----------
+					if(modelX > 1020 && modelX < 1110){
+						twtBtnScale = 1.1;
+					}	
+					//----------     FACEBOOK    ----------
+					if(modelX > 1128 && modelX < 1220){
+						fbBtnScale = 1.1;
 					}
 				}
+
 				//----------     PRINT TIPS BUTTONS     ----------
 				if(modelX > 775 && modelX < 1270){
 					if(modelY > 435 && modelY < 525){
@@ -711,16 +728,26 @@
 				}
 				break;
 			case "endscreen":
-				//----------     SHARE BUTTON     ----------
-				if(modelX > 925 && modelX < 1105){
-					if(modelY > 320 && modelY < 415){
-						shareBtnScale = 1;
+
+				if(modelY > 315 && modelY < 405){
+					//----------    TWITTER    ----------
+					if(modelX > 1020 && modelX < 1110){
+						twtBtnScale = 1;
+						window.open('https://twitter.com/intent/tweet?url=https://youthexperts.ca/howsitgrowing&text=What plant are you? Find out with this personality quiz and get helpful tips. %23HowsItGrowing %23youthexperts', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+
+					}	
+					//----------     FACEBOOK    ----------
+					if(modelX > 1128 && modelX < 1220){
+						fbBtnScale = 1;
+						window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A//youthexperts.ca&t=Hows it Growing?', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
 					}
 				}
+
 				//----------     PRINT TIPS BUTTONS     ----------
 				if(modelX > 775 && modelX < 1270){
 					if(modelY > 435 && modelY < 525){
 						printBtnScale = 1;
+						window.open(pdfUrl); 
 					}
 				}
 				//----------     RETAKE BUTTONS     ----------
@@ -754,7 +781,8 @@
 		backBtnScale = 1;
 		nextBtnScale = 1;
 		printBtnScale = 1;
-		shareBtnScale = 1;
+		twtBtnScale = 1;
+		fbBtnScale = 1;
 		quizBtnScale = 1;
 
 		switch(GAME_STATE){
@@ -793,11 +821,23 @@
 				break;
 			case "endscreen":
 				//----------     SHARE BUTTON     ----------
-				if(modelX > 925 && modelX < 1105){
+/*				if(modelX > 925 && modelX < 1105){
 					if(modelY > 320 && modelY < 415){
 						shareBtnScale = 1.1;
 					}
+				}*/
+				if(modelY > 315 && modelY < 405){
+					//----------    TWITTER    ----------
+					if(modelX > 1020 && modelX < 1110){
+						twtBtnScale = 1.1;
+					}	
+					//----------     FACEBOOK    ----------
+					if(modelX > 1128 && modelX < 1220){
+						fbBtnScale = 1.1;
+					}
 				}
+
+
 				//----------     PRINT TIPS BUTTONS     ----------
 				if(modelX > 775 && modelX < 1270){
 					if(modelY > 435 && modelY < 525){
@@ -910,31 +950,35 @@
 				activePopUps[0] = new titlePopUp(snakePlant,641,455);
 				plantText_01 = "Snake plants are hardy and resilient. They can live with very little sunlight and very little water. Despite this they give a lot back to their environment, snake plants produce oxygen and purify the air.";
 				plantText_02 = "Just like the snake plant you might find yourself giving a lot to others. People come to you due to your strong and reliable presence. You give a lot of your time and energy to others and sometimes you are at risk of neglecting your own self care needs.";
-				pdfUrl = "";
+				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Snake.pdf";
 				break;
 			case 1:
 				finalPlantName = "Cactus!";
 				activePopUps[0] = new titlePopUp(cactusPlant,641,455);
 				plantText_01 = "Cacti are a symbol of warmth and protection due to their spikes and the fact that they grow in sunny climates and produce beautiful flowers. They don't need a lot of water to grow and their shallow root systems help them absorb any available water quickly.";
 				plantText_02 = "Similar to a cacti you project a warm and welcoming vibe. People see you as independent, strong and determined. A can-do attitude is a great asset but it’s important to remember that it’s ok to ask for help when you need it.";
+				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Cactus.pdf";
 				break;
 			case 2:
 				finalPlantName = "Money Tree!";
 				activePopUps[0] = new titlePopUp(moneyPlant,641,455);
 				plantText_01 = "Money trees are associated with positive energy, luck and prosperity. They thrive with consistency, requiring lots of sunlight and regular watering and pruning. They are grounded and provide shelter for those around them.";
 				plantText_02 = "Like the money tree you are positive and focused on caring for those around you. It can be hard for you to sit with and express negative emotions. While sharing your negative emotions might seem scary, it is vital because it will help you grow and flourish.";
+				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Money.pdf";
 				break;
 			case 3:
 				finalPlantName = "Lavender Plant!";
 				activePopUps[0] = new titlePopUp(lavenderPlant,641,455);
 				plantText_01 = "Lavender is associated with healing and calming due to it’s beautiful scent and appearance, as a result it is used extensively in aromatherapy and cooking. While this plant is very tough, it needs full sun and the soil needs to be well drained";
 				plantText_02 = "Just like lavender you have a calming presence to those around you. People may often come to you to vent their problems or ask for advice. You may need to build up your boundaries and protect your energy to be there for them in the long run.";
+				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Lavender.pdf";
 				break;
 			case 4:
 				finalPlantName = "Palm Plant!";
 				activePopUps[0] = new titlePopUp(palmPlant,641,455);
 				plantText_01 = "Palm plants are associated with victory, peace and tropical vacations. These plants need warmth, lot’s of sun and just the right amount of water. They need to be fertilized during the dormant season so can they keep growing strong.";
 				plantText_02 = "Just as the palm takes a rest during the dormant season and needs nourishment, you need to do this for yourself as well. If you are feeling overwhelmed set aside time to reflect on your past experiences and how they may still be affecting you.";
+				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Palm.pdf";
 				break;
 		}
 	}
@@ -980,7 +1024,8 @@
 		paragraphYPos = 0;
 
 		quizBtnScale = 1;
-		shareBtnScale = 1;
+		twtBtnScale = 1;
+		fbBtnScale = 1;
 		takeQuizBtnScale = 1;
 		nextBtnScale = 1;
 		backBtnScale = 1;
