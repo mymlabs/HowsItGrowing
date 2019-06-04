@@ -964,13 +964,13 @@
 						//----------    TWITTER    ----------
 						if(modelX > 913 && modelX < 1001){
 							twtBtnScale = 1;
-							window.open('https://twitter.com/intent/tweet?url=https://youthexperts.ca/howsitgrowing&text=What plant are you? Find out with this personality quiz and get helpful tips. %23HowsItGrowing %23youthexperts', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+							window.open('https://twitter.com/intent/tweet?url=' + hostURL + '&text=What plant are you? Find out with this personality quiz and get helpful tips. %23HowsItGrowing %23youthexperts', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
 
 						}	
 						//----------     FACEBOOK    ----------
 						if(modelX > 1021 && modelX < 1109){
 							fbBtnScale = 1;
-							window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A//youthexperts.ca&t=Hows it Growing?', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+							window.open('https://www.facebook.com/sharer/sharer.php?u=' + hostURL + '&t=Hows it Growing?', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
 						}
 					}
 
