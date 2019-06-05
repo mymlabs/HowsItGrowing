@@ -468,7 +468,6 @@
 
 			c.font = "49px arial, sans-serif";
 			c.fillText(finalPlantName,291,120);
-
 			//*****************************
 			//******     SLIDE 1     ******
 			//*****************************
@@ -478,24 +477,24 @@
 
 				switch(finalPlant){
 					case 0:
-						wrapText(c,plantText_01,624,205,612,29);
-						wrapText(c,plantText_02,624,424,612,29);
+						wrapText(c,plantText_01,624,60,612,29);
+						wrapText(c,plantText_02,624,279,612,29);
 						break;
 					case 1:
-						wrapText(c,plantText_01,624,205,612,29);
-						wrapText(c,plantText_02,624,450,612,29);
+						wrapText(c,plantText_01,624,60,612,29);
+						wrapText(c,plantText_02,624,305,612,29);
 						break;
 					case 2:
-						wrapText(c,plantText_01,624,205,612,29);
-						wrapText(c,plantText_02,624,398,612,29);
+						wrapText(c,plantText_01,624,60,612,29);
+						wrapText(c,plantText_02,624,253,612,29);
 						break;
 					case 3:
-						wrapText(c,plantText_01,624,205,612,29);
-						wrapText(c,plantText_02,624,372,612,29);
+						wrapText(c,plantText_01,624,60,612,29);
+						wrapText(c,plantText_02,624,227,612,29);
 						break;
 					case 4:
-						wrapText(c,plantText_01,624,205,612,29);
-						wrapText(c,plantText_02,624,398,612,29);
+						wrapText(c,plantText_01,624,60,612,29);
+						wrapText(c,plantText_02,624,253,612,29);
 						break;
 				}
 				drawScaledImage(nextBtn,nextBtnScale,1187,655);
@@ -511,31 +510,31 @@
 				if(finalPlant === 0){
 					wrapText(c,
 						"\u2022 Set three levels of priorities: things I must do, things I should do (but can wait) and things that can wait indefinitely.",
-						624,116,
+						624,60,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Learn to say “no” sometimes. It’s okay. This will give you the opportunity to spend time doing the things that are meaningful to you.",
-						624,218,
+						624,162,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Self care is different for everyone. Try out new things to find what works for you. You might need to change it up depending on your mood and energy level.",
-						624,319,
+						624,263,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Get enough sleep; it’s important for your physical and mental well-being. See a doctor if you experience sleeping problems.",
-						624,451,
+						624,395,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Maintain a balance between work and play. Paint, draw, collage, write or dance!",
-						624,555,
+						624,499,
 						612,29
 						);
 				}
@@ -543,31 +542,31 @@
 				if(finalPlant === 1){
 					wrapText(c,
 						"\u2022 Who do you feel comfortable talking with? Decide who you trust and can communicate with openly.",
-						624,116,
+						624,60,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Make sure you find a quiet, calm space for face to face conversation.",
-						624,218,
+						624,162,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Have an idea of what you need help with before you start the conversation. If you’re not sure you could say something like “I’m having a hard time with _______. Can you help me?”",
-						624,290,
+						624,234,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Make notes of what you want to say and what you’re asking for, it will help you stay on track.",
-						624,422,
+						624,366,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Be sure to thank those who help you.",
-						624,497,
+						624,441,
 						612,29
 						);
 				}
@@ -575,31 +574,31 @@
 				if(finalPlant === 2){
 					wrapText(c,
 						"\u2022 While sharing your negative emotions might seem scary, it will help you grow and flourish.",
-						624,116,
+						624,60,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 It’s hard, but the first step is accepting your emotions and acknowledging them in a non-judgmental way.",
-						624,189,
+						624,133,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Try to reflect on your day. Did anything happen that contributed to how you’re feeling now?",
-						624,290,
+						624,234,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Sometimes reflecting on and accepting your emotions is enough to make you feel better, sometimes it’s not. Try to find a release like talking to a friend or writing.",
-						624,365,
+						624,309,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Recognize that sometimes negative emotions are too much for you to handle on your own. Reach out to someone you trust to support you.",
-						624,499,
+						624,443,
 						612,29
 						);
 				}
@@ -607,31 +606,31 @@
 				if(finalPlant === 3){
 					wrapText(c,
 						"\u2022 Don’t be afraid to say no. A good friend will understand why rather than pressuring you.",
-						624,116,
+						624,60,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Pretending everything is alright when it isn’t, doesn’t help anyone. If you’re upset, try to put the feeling into words. Write it out if you need to!",
-						624,188,
+						624,132,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Make it a goal to speak to others respectfully and expect the same in return. Let people know if you are offended by what they say.",
-						624,290,
+						624,234,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Don’t change who you are to please someone.",
-						624,393,
+						624,337,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Take time for yourself. There’s nothing wrong with wanting to be alone sometimes. Self care is important within relationships.",
-						624,440,
+						624,384,
 						612,29
 						);
 				}
@@ -639,31 +638,31 @@
 				if(finalPlant === 4){
 					wrapText(c,
 						"\u2022 Schedule time for self reflection and find a quiet, comfortable space to do it in.",
-						624,116,
+						624,60,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Choose a time when you have the energy to self- reflect and are in a positive mood, being in the right frame of mind will help you dig deep.",
-						624,189,
+						624,133,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Decide what you want to reflect on; how your past has impacted your present day, what you do well, or what you’ve achieved.",
-						624,290,
+						624,234,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Self-reflection can bring up overwhelming feelings, make a list of supportive people and reach out to them when necessary.",
-						624,393,
+						624,337,
 						612,29
 						);
 
 					wrapText(c,
 						"\u2022 Journaling is a great way to learn new things about yourself and keep track of your personal growth.",
-						624,497,
+						624,441,
 						612,29
 						);
 				}
@@ -678,14 +677,14 @@
 				c.font = "27px arial, sans-serif";
 				wrapText(c,
 					"Thanks for playing! We hope that you learned a little bit about yourself today!",
-					624,116,612,29);
+					624,60,612,29);
 				wrapText(c,
 					"Shout out to our Windsor Crew for pouring their dedication into this creation:",
-					624,189,612,29);
+					624,133,612,29);
 
 				wrapText(c,
-					"Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally & Aleyna",
-					624,261,612,29);
+					"Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally and Aleyna.",
+					624,205,612,29);
 
 				c.drawImage(shareBtn, 726, 357);
 				drawScaledImage(twitterLink,twtBtnScale,957,390);
