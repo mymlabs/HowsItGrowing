@@ -673,18 +673,18 @@
 			//******     SLIDE 3     ******
 			//*****************************
 			if(endScreenSlideNum === 3){
-				c.textAlign = "left";
+				c.textAlign = "center";
 				c.font = "27px arial, sans-serif";
 				wrapText(c,
 					"Thanks for playing! We hope that you learned a little bit about yourself today!",
-					624,60,612,29);
+					925,60,612,29);
 				wrapText(c,
 					"Shout out to our Windsor Crew for pouring their dedication into this creation:",
-					624,133,612,29);
+					925,133,612,29);
 
 				wrapText(c,
 					"Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally and Aleyna.",
-					624,205,612,29);
+					925,205,550,29);
 
 				c.drawImage(shareBtn, 726, 357);
 				drawScaledImage(twitterLink,twtBtnScale,957,390);
