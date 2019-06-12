@@ -72,7 +72,7 @@
 			"I am open to other people’s boundaries and limits.",
 			"I often think about what I could have done differently in situations that don’t go how I hoped.",
 			"I like to plan ahead and think of the best way to approach things.",
-			"I give myself time to reflect and process on the days events."
+			"I give myself time to reflect and process on the days' events."
 		]
 		totalQuestions = questions.length;
 		currentPlant = 0;
@@ -521,7 +521,7 @@
 						);
 
 					wrapText(c,
-						"\u2022 Self care is different for everyone. Try out new things to find what works for you. You might need to change it up depending on your mood and energy level.",
+						"\u2022 Self-care is different for everyone. Try out new things to find what works for you. You might need to change it up depending on your mood and energy level.",
 						624,263,
 						612,29
 						);
@@ -547,19 +547,19 @@
 						);
 
 					wrapText(c,
-						"\u2022 Make sure you find a quiet, calm space for face to face conversation.",
+						"\u2022 Make sure you find a quiet, calm space for face-to-face conversation.",
 						624,162,
 						612,29
 						);
 
 					wrapText(c,
-						"\u2022 Have an idea of what you need help with before you start the conversation. If you’re not sure you could say something like “I’m having a hard time with _______. Can you help me?”",
+						"\u2022 Have an idea of what you need help with before you start the conversation. If you’re not sure, you could say something like, “I’m having a hard time with _______. Can you help me?”",
 						624,234,
 						612,29
 						);
 
 					wrapText(c,
-						"\u2022 Make notes of what you want to say and what you’re asking for, it will help you stay on track.",
+						"\u2022 Make notes of what you want to say and what you’re asking for. It will help you stay on track.",
 						624,366,
 						612,29
 						);
@@ -1047,6 +1047,7 @@
 					if(activeSliderObject[0].x > activeSliderObject[0].xMax){
 						activeSliderObject[0].x = activeSliderObject[0].xMax
 					}
+					activeSliderObject[0].update();
 				}
 				break;
 			case "endscreen":
@@ -1189,35 +1190,35 @@
 			case 0:
 				finalPlantName = "Snake Plant!";
 				activePopUps[0] = new titlePopUp(snakePlant,298,367);
-				plantText_01 = "Snake plants are hardy and resilient. They can live with very little sunlight and water. Despite this, they give a lot back to their environment, purifying the air and producing oxygen. In Feng Shui snake plants are associated with protection and are a great addition to any home!";
-				plantText_02 = "Just like the snake plant you might find yourself giving a lot to others. You give a lot of your time and energy to others and sometimes you are at risk of neglecting your own self care needs.";
+				plantText_01 = "Snake plants are hardy and resilient. They can live with very little sunlight and water. Despite this, they give a lot back to their environment, purifying the air and producing oxygen. In Feng Shui, snake plants are associated with protection and are a great addition to any home!";
+				plantText_02 = "Just like the snake plant, you might find yourself giving a lot to others. You give a lot of your time and energy to others and sometimes you are at risk of neglecting your own self care needs.";
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Snake.pdf";
 				break;
 			case 1:
 				finalPlantName = "Cactus!";
 				activePopUps[0] = new titlePopUp(cactusPlant,298,367);
-				plantText_01 = "Cacti are a symbol of warmth and protection due to their spikes and the fact that they grow in sunny climates and produce beautiful flowers. They don’t need a lot of water to grow and their shallow root systems help them absorb any available water quickly. That being said these plants need a lot of sun in order to stay healthy and continue growing.";
-				plantText_02 = "Similar to a cactus, people see you as independent, strong and determined.";
+				plantText_01 = "Cacti are a symbol of warmth and protection due to their spikes and the fact that they grow in sunny climates and produce beautiful flowers. They don’t need a lot of water to grow and their shallow root systems help them absorb any available water quickly. That being said, these plants need a lot of sun in order to stay healthy and continue growing.";
+				plantText_02 = "Similar to a cactus, people see you as independent, strong and determined. Those are great qualities but sometimes they might prevent you from asking for help when you need it. Here are some tips to help you get started:";
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Cactus.pdf";
 				break;
 			case 2:
 				finalPlantName = "Money Tree!";
 				activePopUps[0] = new titlePopUp(moneyPlant,298,367);
 				plantText_01 = "Money trees are associated with positive energy, luck and prosperity. They thrive with consistency, requiring lots of sunlight, pruning and regular watering. Money trees are grounded and provide shelter for those around them.";
-				plantText_02 = "Like the money tree you are positive and focused on caring for those around you. It can be hard for you to sit with and express negative emotions.";
+				plantText_02 = "Like the money tree, you are positive and focused on caring for those around you. It can be hard for you to sit with and express negative emotions.";
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Money.pdf";
 				break;
 			case 3:
 				finalPlantName = "Lavender Plant!";
 				activePopUps[0] = new titlePopUp(lavenderPlant,298,367);
-				plantText_01 = "Lavender is associated with healing and calming, as a result it is used extensively in aromatherapy. While this plant is very tough, it needs full sun and the soil needs to be well drained.";
-				plantText_02 = "Just like lavender you have a calming presence to those around you. People may often come to you to vent their problems or ask for advice. Sometimes you might find yourself mulling over other people’s problems hours after you talked to them. Helping others is great but it may be necessary to set boundaries.";
+				plantText_01 = "Lavender is associated with healing and calming. As a result, it is used extensively in aromatherapy. While this plant is very tough, it needs full sun and the soil needs to be well drained.";
+				plantText_02 = "Just like lavender, you have a calming presence to those around you. People may often come to you to vent their problems or ask for advice. Sometimes you might find yourself mulling over other people’s problems hours after you talked to them. Helping others is great but it may be necessary to set boundaries.";
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Lavender.pdf";
 				break;
 			case 4:
 				finalPlantName = "Palm Plant!";
 				activePopUps[0] = new titlePopUp(palmPlant,298,367);
-				plantText_01 = "Palm plants are associated with victory, peace and tropical vacations. These plants need warmth, lots of sun and just the right amount of water. They need to be fertilized during the dormant season so can they keep growing strong.";
+				plantText_01 = "Palm plants are associated with victory, peace and tropical vacations. These plants need warmth, lots of sun and just the right amount of water. They need to be fertilized during the dormant season so they can keep growing strong.";
 				plantText_02 = "Just as the palm takes a rest during the dormant season and needs nourishment, you need to do this for yourself as well.";
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Palm.pdf";
 				break;
