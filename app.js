@@ -44,7 +44,7 @@
 		titleScreenText = "Discover your place in the garden and learn positive coping strategies by taking this personality quiz.";
 
 		hostURL = window.location.href;
-		console.log(hostURL);
+		//console.log(hostURL);
 
 		currentQuestion = 1;
 		
@@ -1150,7 +1150,7 @@
 	//******     CALCULATE END PLANT     ******
 	//*****************************************
 	function calculateEndPlant(){
-		console.log('calc plant');
+
 		for(ii=0;ii<5;ii++){
 			var plantTrack = 0;
 			for(jj=0;jj<3;jj++){
@@ -1161,8 +1161,8 @@
 			finalScores[ii] = plantTrack;
 		}
 
-		console.log(finalScores);
-		console.log(Math.max.apply(null,finalScores));
+/*		console.log(finalScores);
+		console.log(Math.max.apply(null,finalScores));*/
 		finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
 		//console.log(finalPlant + 1);
 
@@ -1205,7 +1205,7 @@
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Palm.pdf";
 				break;
 		}
-		console.log(finalPlantName);
+		//console.log(finalPlantName);
 	}
 
 	//***********************************
