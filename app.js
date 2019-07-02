@@ -92,6 +92,17 @@
 
 		endScreenSlideNum = 1;
 
+		dotButtonY = 325;
+		dotButtonX = [721,826,935,1037,1142];
+		dotButtonSize = 45;
+
+		dotFillY = 339;
+		dotFillX = [735,840,949,1051,1156];
+
+		dotSelected = false;
+		activeDot = 0;
+
+		showNext = false;
 	}//End of init
 
 //   /$$                           /$$ /$$                    
@@ -108,12 +119,9 @@
 	function loadAssets(){
 		//----------     INIT IMAGES    ----------
 		background = new Image();
-		//youthExpertsLogo = new Image();
 		gameLogo = new Image();
 		takeQuizBtn = new Image();
 		quizBG = new Image();
-		sliderBG = new Image();
-		sliderControl = new Image();
 		backBtn = new Image();
 		nextBtn = new Image();
 		doneBtn = new Image();
@@ -122,6 +130,8 @@
 		lavenderPlant = new Image();
 		moneyPlant = new Image();
 		snakePlant = new Image();
+		dotBG = new Image();
+		dotFill = new Image();
 		printTipsBtn = new Image();
 		retakeQuizBtn = new Image();
 		shareBtn = new Image();
@@ -130,14 +140,12 @@
 		canadaLogo = new Image();
 		fbLink = new Image();
 		twitterLink = new Image();
+
 		//----------     ADD LISTENERS     ----------
 		background.onload = updateLoading();
-		//youthExpertsLogo.onload = updateLoading();
 		gameLogo.onload = updateLoading();
 		takeQuizBtn.onload = updateLoading();
 		quizBG.onload = updateLoading();
-		sliderBG.onload = updateLoading();
-		sliderControl.onload = updateLoading();
 		backBtn.onload = updateLoading();
 		nextBtn.onload = updateLoading();
 		doneBtn.onload = updateLoading();
@@ -146,6 +154,8 @@
 		lavenderPlant.onload = updateLoading();
 		moneyPlant.onload = updateLoading();
 		snakePlant.onload = updateLoading();
+		dotBG.onload = updateLoading();
+		dotFill.onload = updateLoading();
 		printTipsBtn.onload = updateLoading();
 		retakeQuizBtn.onload = updateLoading();
 		shareBtn.onload = updateLoading();
@@ -154,14 +164,12 @@
 		canadaLogo.onload = updateLoading();
 		fbLink.onload = updateLoading();
 		twitterLink.onload = updateLoading();
+
 		//----------     SET SOURCES    ----------
 		background.src = "images/background.png";
-		//youthExpertsLogo.src = "images/youthexperts_lg.png";
 		gameLogo.src = "images/game_logo.png";
 		takeQuizBtn.src = "images/take_quiz_btn.png";
 		quizBG.src = "images/quiz_bg.png";
-		sliderBG.src = "images/slider_bg.png";
-		sliderControl.src = "images/slider_control.png";
 		backBtn.src = "images/back_button.png";
 		nextBtn.src = "images/next_button.png";
 		doneBtn.src = "images/done_button.png";
@@ -170,6 +178,8 @@
 		lavenderPlant.src = "images/lavender_plant.png";
 		moneyPlant.src = "images/money_plant.png";
 		snakePlant.src = "images/snake_plant.png";
+		dotBG.src = "images/dot_bg.png";
+		dotFill.src = "images/dot_fill.png";
 		printTipsBtn.src = "images/print_tips.png";
 		retakeQuizBtn.src = "images/retake_quiz_btn.png";
 		shareBtn.src = "images/share_btn.png";
@@ -409,9 +419,20 @@
 				titleObject.update();
 			});
 
-			c.drawImage(sliderBG,746,361);
+			//c.drawImage(sliderBG,746,361);
 
-			activeSliderObject[0].update();
+			//activeSliderObject[0].update();
+
+			for(ii=0;ii<5;ii++){
+				c.drawImage(dotBG,dotButtonX[ii],dotButtonY);
+				//c.drawImage(dotFill,dotFillX[ii],dotFillY);
+
+
+			}
+			if(dotSelected === true){
+				c.drawImage(dotFill,dotFillX[activeDot],dotFillY);
+				
+			}
 
 			c.textAlign = "center";
 			c.fillStyle = "#000";
@@ -428,16 +449,19 @@
 
 			c.fillStyle = "#000";
 			c.font = "bold 34px arial, sans-serif";
-			wrapText(c,questionText,956,230,536,35);
+			wrapText(c,questionText,956,200,536,35);
 
 			if(currentQuestion > 1){
 				drawScaledImage(backBtn,backBtnScale,741,653);
 			}
-			if(currentQuestion < totalQuestions){
-				drawScaledImage(nextBtn,nextBtnScale,1187,655);
-			}else{
-				drawScaledImage(doneBtn,nextBtnScale,1187,655);
+			if(showNext === true){
+				if(currentQuestion < totalQuestions){
+					drawScaledImage(nextBtn,nextBtnScale,1187,655);
+				}else{
+					drawScaledImage(doneBtn,nextBtnScale,1187,655);
+				}
 			}
+
 
 			c.drawImage(youthExpertsSM,17,629);
 			c.drawImage(canadaLogo,275,650);
@@ -719,7 +743,7 @@
 		switch(GAME_STATE){
 			case "title":
 				activeTitleObjects[activeTitleObjects.length] = new titleObject(quizBG,screenWidth,0,617,0);
-				activeSliderObject[0] = new sliderObject();
+				/*activeSliderObject[0] = new sliderObject();*/
 				questionText = questions[currentQuestion - 1];
 				setThemeText(currentQuestion);
 				activeFadeObjects = [];
@@ -800,7 +824,6 @@
 						nextBtnScale = 1.1;
 					}
 				}
-				activeSliderObject[0].checkCollision(modelX,modelY);
 				break;
 
 			case "endscreen":
@@ -881,62 +904,55 @@
 							backBtnScale = 1;
 							currentQuestion--;
 							questionText = questions[currentQuestion - 1];
-							/*console.log();*/
-
-/*							var thisPercentage = plantValues[currentQuestion - 1] / 100;
-							var pixelValue = thisPercentage * activeSliderObject[0].sliderLength;
-							var newPosition = pixelValue + activeSliderObject[0].xMin;
-							console.log(thisPercentage + " of " + activeSliderObject[0].sliderLength + " is " + pixelValue);
-							activeSliderObject[0].x = newPosition;*/
-							activeSliderObject[0].x = ((plantValues[currentQuestion - 1] / 100)
-															* activeSliderObject[0].sliderLength)
-															+ activeSliderObject[0].xMin;
-							//activeSliderObject[0].x = thisPercentage * activeSliderObject[0].sliderLength) + activeSliderObject[0].xMin;
+							dotSelected = true;
+							activeDot = plantValues[currentQuestion - 1] / 20;
+							showNext = true;
 						}
 					}
 				}
+
+				//----------     VALUE BUTTONS     ----------
+				if(modelY > dotButtonY && modelY < dotButtonY + dotButtonSize){
+					for(ii=0;ii<5;ii++){
+						if(modelX > dotButtonX[ii] && modelX < dotButtonX[ii] + dotButtonSize){
+							plantValues[currentQuestion - 1] = ii * 20;
+							dotSelected = true;
+							showNext = true;
+							activeDot = ii;
+						}
+					}
+				}
+
 				//----------     NEXT BUTTON     ----------
-				if(modelX > 1108 && modelX < 1266){
-					if(modelY > 606 && modelY < 704){
-						if(currentQuestion <= totalQuestions){
-							nextBtnScale = 1;
-							calculateAnswerPercent();
+				if(showNext === true){
+					if(modelX > 1108 && modelX < 1266){
+						if(modelY > 606 && modelY < 704){
+							if(currentQuestion <= totalQuestions){
+								nextBtnScale = 1;
 
-							if(currentQuestion < totalQuestions){
-								currentQuestion++;
-								if(currentQuestion <= plantValues.length){
-									activeSliderObject[0].x = ((plantValues[currentQuestion - 1] / 100)
-																* activeSliderObject[0].sliderLength)
-																+ activeSliderObject[0].xMin;
+								if(currentQuestion < totalQuestions){
+									currentQuestion++;
+									if(currentQuestion <= plantValues.length){
+										dotSelected = true;
+										activeDot = plantValues[currentQuestion - 1] / 20;
+										showNext = true;
+									}else{
+										dotSelected = false;
+										showNext = false;
+									}
+									
+									questionText = questions[currentQuestion - 1];
+									setThemeText(currentQuestion);
 								}else{
-									activeSliderObject[0].x = activeSliderObject[0].startX;
-								}
-								
-								questionText = questions[currentQuestion - 1];
-								setThemeText(currentQuestion);
-							}else{
-/*								activeFadeObjects[0] = new screenFade(0,1,"#FFF");
-								setTimeout(function(){
 									changeState();
-								},800);*/
-								changeState();
+								}
+
 							}
-
 						}
-					}
-				}
-				//----------     LETTING GO OF SLIDER     ----------
-				if(activeSliderObject[0].active === true){
-					activeSliderObject[0].active = false;
-				}else{
-					if(modelY > 360 && modelY < 385){
-						if(modelX > 746 && modelX < 1164){
-							activeSliderObject[0].x = modelX - activeSliderObject[0].width / 2;
-						}
-					}
-
+					}	
 				}
 				break;
+
 			case "endscreen":
 
 				if(endScreenSlideNum === 1){
@@ -1038,17 +1054,6 @@
 						nextBtnScale = 1.1;
 					}
 				}
-				//----------     MOVING SLIDER     ----------
-				if(activeSliderObject[0].active === true){
-					activeSliderObject[0].x = modelX - activeSliderObject[0].width / 2;
-					if(activeSliderObject[0].x < activeSliderObject[0].xMin){
-						activeSliderObject[0].x = activeSliderObject[0].xMin
-					}
-					if(activeSliderObject[0].x > activeSliderObject[0].xMax){
-						activeSliderObject[0].x = activeSliderObject[0].xMax
-					}
-					activeSliderObject[0].update();
-				}
 				break;
 			case "endscreen":
 
@@ -1141,34 +1146,11 @@
 		c.restore();
 	};//End of draw scaled image
 
-	//**********************************************
-	//******     CALCULATE ANSWER PERCENT     ******
-	//**********************************************
-	function calculateAnswerPercent(){
-		var sliderPosition = activeSliderObject[0].x + activeSliderObject[0].width / 2;
-		percentageResult = (sliderPosition - activeSliderObject[0].xMin) / activeSliderObject[0].sliderLength;
-		//adjust for my wonky math
-		percentageResult = percentageResult * 100 - 3;
-		if(percentageResult < 0){
-			percentageResult = 0;
-		}
-		if(percentageResult > 100){
-			percentageResult = 100;
-		}
-		if(plantValues.length < currentQuestion){
-			/*console.log('adding new value');*/
-			plantValues.push(Math.floor(percentageResult));
-		}else{
-			/*console.log('updating array');*/
-			plantValues[currentQuestion - 1] = percentageResult;
-		}
-	};
-
 	//*****************************************
 	//******     CALCULATE END PLANT     ******
 	//*****************************************
 	function calculateEndPlant(){
-
+		console.log('calc plant');
 		for(ii=0;ii<5;ii++){
 			var plantTrack = 0;
 			for(jj=0;jj<3;jj++){
@@ -1179,8 +1161,8 @@
 			finalScores[ii] = plantTrack;
 		}
 
-/*		console.log(finalScores);
-		console.log(Math.max.apply(null,finalScores));*/
+		console.log(finalScores);
+		console.log(Math.max.apply(null,finalScores));
 		finalPlant = finalScores.indexOf(Math.max.apply(null,finalScores));
 		//console.log(finalPlant + 1);
 
@@ -1223,6 +1205,7 @@
 				pdfUrl = "https://mindyourmind.ca/apps/HowsItGrowing/Hows-It-Growing_Palm.pdf";
 				break;
 		}
+		console.log(finalPlantName);
 	}
 
 	//***********************************
