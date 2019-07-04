@@ -25,7 +25,7 @@
 		offsetX = container.offsetLeft;
 		offsetY = container.offsetTop;
 		INPUT_TYPE = null;
-		filesToLoad = 17;
+		filesToLoad = 18;
 		filesLoaded = 0;
 		GAME_STATE = "loading";
 		gameLoaded = false;
@@ -140,6 +140,7 @@
 		canadaLogo = new Image();
 		fbLink = new Image();
 		twitterLink = new Image();
+		HDGHLogo = new Image();
 
 		//----------     ADD LISTENERS     ----------
 		background.onload = updateLoading();
@@ -164,7 +165,7 @@
 		canadaLogo.onload = updateLoading();
 		fbLink.onload = updateLoading();
 		twitterLink.onload = updateLoading();
-
+		HDGHLogo.onload = updateLoading();
 		//----------     SET SOURCES    ----------
 		background.src = "images/background.png";
 		gameLogo.src = "images/game_logo.png";
@@ -188,6 +189,7 @@
 		canadaLogo.src = "images/canada_logo.png";
 		fbLink.src = "images/fb_link.png";
 		twitterLink.src = "images/twt_link.png";
+		HDGHLogo.src = "images/HDGH_logo_sm.png";
 	}//End of loadAssets
 
 	//************************************
@@ -703,12 +705,16 @@
 					"Thanks for playing! We hope that you learned a little bit about yourself today!",
 					925,60,612,29);
 				wrapText(c,
-					"Shout out to our Windsor Crew for pouring their dedication into this creation:",
+					"Thank you to our Windsor Crew: Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally and Aleyna.",
 					925,133,612,29);
 
-				wrapText(c,
-					"Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally and Aleyna.",
-					925,205,550,29);
+				c.fillText("Thank you to our Windsor partners",795,260)
+
+/*				wrapText(c,
+					"Thank you to our Windsor partners                          ",
+					925,240,650,29);
+*/
+				c.drawImage(HDGHLogo,1020,205);
 
 				c.drawImage(shareBtn, 726, 357);
 				drawScaledImage(twitterLink,twtBtnScale,957,390);
@@ -988,6 +994,32 @@
 							window.open('https://www.facebook.com/sharer/sharer.php?u=' + hostURL + '&t=Hows it Growing?', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
 						}
 					}
+
+					if(modelY > 629){
+						//----------     YOUTH EXPERTS BUTTON     ----------
+						if(modelX > 10 && modelX < 235){
+							window.open("https://youthexperts.ca/");
+						}
+
+						//----------     CSC FEDERAL BUTTON     ----------
+						if(modelX > 275 && modelX < 510){
+							window.open("https://www.canada.ca/en/employment-social-development/services/funding/projects-youth-serving-organizations.html");
+						}
+					}
+
+					//----------     PARTNER BUTTON     ----------
+					if(modelX > 1020 && modelX < 1259){
+						if(modelY > 205 && modelY < 305){
+							window.open("https://www.hdgh.org/");
+						}
+					}
+
+
+				//c.drawImage(HDGHLogo,1020,205);
+				c.drawImage(youthExpertsSM,17,629);
+				c.drawImage(canadaLogo,275,650);
+				c.drawImage(cscLogo,410,635);
+
 
 					//----------     PRINT TIPS BUTTONS     ----------
 					if(modelX > 677 && modelX < 1161){
