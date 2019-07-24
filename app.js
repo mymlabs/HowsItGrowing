@@ -696,7 +696,7 @@
 						612,29
 						);
 				}
-				drawScaledImage(nextBtn,nextBtnScale,1250,655);
+				drawScaledImage(nextBtn,nextBtnScale,1187,655);
 			}
 
 			//*****************************
