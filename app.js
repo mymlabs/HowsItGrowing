@@ -41,7 +41,7 @@
 
 		amplitude = 0.02;
 		period = 2000;
-		titleScreenText = "Discover your place in the garden and learn positive coping strategies by taking this personality quiz.";
+		titleScreenText = "Discover your place in the garden and learn positive coping strategies by taking this quiz.";
 
 		hostURL = window.location.href;
 		//console.log(hostURL);
