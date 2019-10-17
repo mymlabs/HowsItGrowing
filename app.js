@@ -709,7 +709,7 @@
 					"Thanks for playing! We hope that you learned a little bit about yourself today!",
 					925,60,612,29);
 				wrapText(c,
-					"Thank you to our Windsor Crew: Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Diana, Ally and Aleyna.",
+					"Thank you to our Windsor Crew: Ahmed, Sophia, Tyler, Cole, Erica, Pavneet, Daisy, Shaawnonoo, Matthew, Daina, Ally and Aleyna.",
 					925,133,612,29);
 
 				c.fillText("Thank you to our Windsor partners:",925,240)
